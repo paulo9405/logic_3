@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>List Double</h1>
+
+  {% for item in double %}
+    <ul>
+      <li> {{ item.name }} | {{ item.value }} | {{ item.double_value }}</li>
+    </ul>
+  {% endfor %}
+
+<a href="{% url 'double_create' %}">Double Create</a>
+
+</body>
+</html>
