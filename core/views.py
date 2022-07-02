@@ -16,9 +16,18 @@ def double_create(request):
     val_user = request.POST.get('value')
     value_user = int(val_user or 0)
     regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+    data_obj = None
 
+    obj = Double.objects.filter(name=name_user, value=val_user)
+    if obj.count() > 0:
+        data_obj = obj[0]
 
-    if value_user > 1000 or value_user < -1000:
+    if data_obj is not None:
+        return render(request, 'double_exist.html', {'name_user_obj': data_obj.name,
+                                                     'data_value_obj': data_obj.value,
+                                                     'data_date_obj': data_obj.date})
+
+    elif value_user > 1000 or value_user < -1000:
         erro_value = 'Please do not use value greater than 1000 or greater than -1000'
         return render(request, 'double_create.html', {'form': form, 'erro_value': erro_value})
 
